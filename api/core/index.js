@@ -15,8 +15,8 @@ app.get('/users', (req, res) => {
 
 // Rota para criar um novo usuário
 app.post('/users', (req, res) => {
-    const newUser = req.body;
-    users.push(newUser);
+    const {user} = req.body;
+    users.push(user);
     res.status(201).send('Usuário criado com sucesso.');
 });
 
