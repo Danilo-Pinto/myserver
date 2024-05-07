@@ -20,4 +20,9 @@ app.post('/users', (req, res) => {
     res.status(201).send('Usuário criado com sucesso.');
 });
 
+// Iniciar o servidor
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});
+
 module.exports.handler = serverless(app);
