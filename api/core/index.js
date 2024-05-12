@@ -39,19 +39,4 @@ app.get('/users', (req, res) => {
     });
 });
 
-// Definir a tarefa do cronjob
-cron.schedule('1 * * * *', () => {
-    const now = new Date();
-    const logMessage = `Data: ${now.toLocaleDateString()}, Hora: ${now.toLocaleTimeString()} \n`;
-    const fileName = `${now.getTime()}.txt`; // Nome do arquivo com timestamp
-    const filePath = path.join(logDirectory, fileName);
-    
-    // Escrever no arquivo de log
-    fs.writeFile(filePath, logMessage, { flag: 'a' }, (err) => {
-        if (err) throw err;
-        console.log('Informações registradas no arquivo de log.');
-    });
-});
-
-// Exportar a aplicação para ser usada com o serverless
 module.exports.handler = serverless(app);
