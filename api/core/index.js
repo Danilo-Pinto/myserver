@@ -1,39 +1,20 @@
 const express = require('express');
 const serverless = require('serverless-http');
-const cron = require('node-cron');
-const fs = require('fs');
-const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+// Middleware para permitir o uso de JSON no corpo das requisições
 app.use(express.json());
-
-
+let users = [];
+// Rota para listar todos os usuários
 app.get('/users', (req, res) => {
+    res.json(users);
+});
 
-    const logDirectory = path.join(__dirname, 'logs');
-
-    if (!fs.existsSync(logDirectory)) {
-        fs.mkdirSync(logDirectory);
-    }
-
-    fs.readdir(logDirectory, (err, files) => {
-        if (err) {
-            console.error('Erro ao ler o diretório de logs:', err);
-            return res.status(500).send('Erro ao ler o diretório de logs');
-        }
-
-        // Filtrar apenas os arquivos com extensão .txt
-        const logFiles = files.filter(file => file.endsWith('.txt'));
-
-        // Extrair as datas dos nomes dos arquivos
-        const dates = logFiles.map(file => {
-            const fileName = path.parse(file).name; // Remover extensão do arquivo
-            return new Date(fileName).toLocaleDateString();
-        });
-
-        res.json(dates);
-    });
+// Rota para criar um novo usuário
+app.post('/users', (req, res) => {
+    const {user} = req.body;
+    users.push(user);
+    res.status(201).send('Usuário criado com sucesso.');
 });
 
 module.exports.handler = serverless(app);
