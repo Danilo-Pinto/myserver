@@ -53,10 +53,5 @@ cron.schedule('1 * * * *', () => {
     });
 });
 
-// Iniciar o servidor
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-});
-
 // Exportar a aplicação para ser usada com o serverless
 module.exports.handler = serverless(app);
