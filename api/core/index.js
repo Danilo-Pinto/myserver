@@ -18,7 +18,7 @@ if (!fs.existsSync(logDirectory)) {
 }
 
 // Rota para listar as datas dos arquivos de log
-app.get('/logdates', (req, res) => {
+app.get('/users', (req, res) => {
     // Ler o diretório de logs
     fs.readdir(logDirectory, (err, files) => {
         if (err) {
