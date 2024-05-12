@@ -6,20 +6,17 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware para permitir o uso de JSON no corpo das requisições
 app.use(express.json());
 
-// Definir o diretório onde os arquivos de log serão armazenados
-const logDirectory = path.join(__dirname, 'logs');
 
-// Certificar-se de que o diretório de logs exista
-if (!fs.existsSync(logDirectory)) {
-    fs.mkdirSync(logDirectory);
-}
-
-// Rota para listar as datas dos arquivos de log
 app.get('/users', (req, res) => {
-    // Ler o diretório de logs
+
+    const logDirectory = path.join(__dirname, 'logs');
+
+    if (!fs.existsSync(logDirectory)) {
+        fs.mkdirSync(logDirectory);
+    }
+
     fs.readdir(logDirectory, (err, files) => {
         if (err) {
             console.error('Erro ao ler o diretório de logs:', err);
