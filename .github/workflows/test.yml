@@ -5,7 +5,7 @@ on:
     - cron: '*/1 * * * *' # Executa a cada hora, no início da hora
 
 jobs:
-  hello_world:
+  report:
     runs-on: ubuntu-latest
     steps:
       - name: Say Hello
