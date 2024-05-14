@@ -2,7 +2,7 @@ name: Cron Hello World
 
 on:
   schedule:
-    - cron: '1 * * * *' # Executa a cada hora, no início da hora
+    - cron: '* * * * *' # Executa a cada hora, no início da hora
 
 jobs:
   hello_world:
